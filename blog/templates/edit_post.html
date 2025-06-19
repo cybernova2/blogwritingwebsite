@@ -1,0 +1,14 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head><title>Edit Post</title> <link rel="stylesheet" href="{% static 'blog/style.css' %}"></head>
+<body>
+    <h1>Edit Post: {{ post.title }}</h1>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Save</button>
+    </form>
+    <a href="{% url 'index' %}">Back</a>
+</body>
+</html>

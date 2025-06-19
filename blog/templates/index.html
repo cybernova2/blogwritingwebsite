@@ -1,0 +1,19 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head><title>Blog - Home</title>
+ <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+</head>
+<body>
+    <h1>All Blog Posts</h1>
+    <a href="{% url 'create_post' %}">+ Create New Post</a>
+    <hr>
+    {% for post in posts %}
+        <h2><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+        <hr>
+    {% empty %}
+        <p>No posts found.</p>
+    {% endfor %}
+</body>
+</html>
