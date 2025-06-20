@@ -160,3 +160,7 @@ ul.messages li.error {
     color: #721c24;
     border: 1px solid #f5c6cb;
 }
+ul li::before {
+    content: "📌 ";
+    margin-right: 5px;
+}

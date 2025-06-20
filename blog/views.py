@@ -14,8 +14,7 @@ from django.contrib.auth.decorators import login_required
 def index(request):
     categories = Category.objects.all().order_by('name')  # Sort categories A-Z
     all_messages = list(messages.get_messages(request))
-    if all_messages:
-        last_message = all_messages[-1]
+    last_message = all_messages[-1] if all_messages else None 
     return render(request, 'index.html', {'categories': categories,'last_message': last_message})
 @login_required
 def post_detail(request, pk):
