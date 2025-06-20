@@ -2,14 +2,13 @@ import json
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
-from .models import BlogPost
+from .models import BlogPost,Category
 from .forms import BlogPostForm
 
 # ---------- HTML Views ----------
 def index(request):
-    posts = BlogPost.objects.all().order_by('-created_at')
-    return render(request, 'index.html', {'posts': posts})
-
+    categories = Category.objects.all().order_by('name')  # Sort categories A-Z
+    return render(request, 'index.html', {'categories': categories})
 def post_detail(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)
     return render(request, 'post_detail.html', {'post': post})

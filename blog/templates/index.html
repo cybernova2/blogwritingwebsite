@@ -2,18 +2,33 @@
 
 <!DOCTYPE html>
 <html>
-<head><title>Blog - Home</title>
- <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+<head>
+    <title>Blog - Home</title>
+    <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
-    <h1>All Blog Posts</h1>
+    <h1>Blog Posts by Category</h1>
     <a href="{% url 'create_post' %}">+ Create New Post</a>
     <hr>
-    {% for post in posts %}
-        <h2><a href="{% url 'post_detail' post.id %}">{{ post.title }}</a></h2>
+
+    {% for category in categories %}
+        <h2>{{ category.name }}</h2>
+        {% with posts=category.posts.all|dictsort:"title" %}
+            {% if posts %}
+                <ul>
+                    {% for post in posts %}
+                        <li>
+                            <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No posts in this category.</p>
+            {% endif %}
+        {% endwith %}
         <hr>
     {% empty %}
-        <p>No posts found.</p>
+        <p>No categories found.</p>
     {% endfor %}
 </body>
 </html>
