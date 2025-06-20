@@ -8,12 +8,15 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
+
 # ---------- HTML Views ----------
 @login_required
 def index(request):
     categories = Category.objects.all().order_by('name')  # Sort categories A-Z
- 
-    return render(request, 'index.html', {'categories': categories})
+    all_messages = list(messages.get_messages(request))
+    if all_messages:
+        last_message = all_messages[-1]
+    return render(request, 'index.html', {'categories': categories,'last_message': last_message})
 @login_required
 def post_detail(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)

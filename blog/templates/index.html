@@ -6,12 +6,10 @@
     <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
-{% if messages %}
-  {% with messages|last as msg %}
-    <ul class="messages">
-      <li class="{{ msg.tags }}">{{ msg }}</li>
-    </ul>
-  {% endwith %}
+{% if last_message %}
+  <ul class="messages">
+    <li class="{{ last_message.tags }}">{{ last_message }}</li>
+  </ul>
 {% endif %}
 
 <div class="auth-buttons">
