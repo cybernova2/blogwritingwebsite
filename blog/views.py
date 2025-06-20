@@ -1,9 +1,10 @@
 import json
 from django.shortcuts import render, redirect, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse,HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt
 from .models import BlogPost,Category
 from .forms import BlogPostForm
+from django.contrib import messages
 
 # ---------- HTML Views ----------
 def index(request):
@@ -25,20 +26,33 @@ def create_post(request):
 
 def edit_post(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)
+
+    # Check ownership
+    if post.author != request.user:
+        return HttpResponseForbidden("You are not allowed to edit this post.")
+
     if request.method == 'POST':
         form = BlogPostForm(request.POST, instance=post)
         if form.is_valid():
             form.save()
+            messages.success(request, "Post updated successfully!")
             return redirect('index')
     else:
         form = BlogPostForm(instance=post)
-    return render(request, 'edit_post.html', {'form': form})
 
+    return render(request, 'edit_post.html', {'form': form, 'post': post})
 def delete_post(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)
+
+    # Check ownership
+    if post.author != request.user:
+        return HttpResponseForbidden("You are not allowed to delete this post.")
+
     if request.method == 'POST':
         post.delete()
+        messages.success(request, "Post deleted successfully!")
         return redirect('index')
+
     return render(request, 'delete_post.html', {'post': post})
 
 # ---------- API Views ----------

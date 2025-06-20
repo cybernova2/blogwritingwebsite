@@ -1,14 +1,19 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head><title>Edit Post</title> <link rel="stylesheet" href="{% static 'blog/style.css' %}"></head>
+<head>
+  <title>Edit Post</title>
+  <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+</head>
 <body>
+  <div class="container">
     <h1>Edit Post: {{ post.title }}</h1>
     <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit"class="button button-primary">Save</button>
+      {% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="button button-primary">Save</button>
     </form>
     <a href="{% url 'index' %}" class="button button-secondary">Back</a>
+  </div>
 </body>
 </html>

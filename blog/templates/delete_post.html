@@ -1,13 +1,18 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-<head><title>Delete Post</title> <link rel="stylesheet" href="{% static 'blog/style.css' %}"></head>
+<head>
+  <title>Delete Post</title>
+  <link rel="stylesheet" href="{% static 'blog/style.css' %}">
+</head>
 <body>
+  <div class="container">
     <h1>Delete "{{ post.title }}"?</h1>
     <form method="post">
-        {% csrf_token %}
-        <button type="submit" class="button button-delete">Yes, delete</button>
+      {% csrf_token %}
+      <button type="submit">Yes, delete</button>
     </form>
-    <a href="{% url 'index' %}" class="button button-edit">Cancel</a>
+    <a href="{% url 'index' %}">Cancel</a>
+  </div>
 </body>
 </html>
