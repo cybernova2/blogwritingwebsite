@@ -6,13 +6,12 @@
     <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
-    {% if messages %}
+{% if messages %}
   <ul class="messages">
-    {% for message in messages %}
-      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-    {% endfor %}
+    <li class="{{ messages|last.tags }}">{{ messages|last }}</li>
   </ul>
 {% endif %}
+
 <div class="auth-buttons">
   {% if request.user.is_authenticated %}
     <span>Welcome, {{ request.user.username }}</span>
