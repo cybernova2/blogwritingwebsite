@@ -6,6 +6,16 @@
   <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
+    <div class="auth-buttons">
+  {% if request.user.is_authenticated %}
+    <span>Welcome, {{ request.user.username }}</span>
+    <a href="{% url 'logout' %}" class="button button-secondary">Logout</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="button button-primary">Login</a>
+    <a href="{% url 'register' %}" class="button button-secondary">Register</a>
+  {% endif %}
+</div>
+<hr>
   <div class="container">
     <h1>{{ post.title }}</h1>
     <p>{{ post.content }}</p>

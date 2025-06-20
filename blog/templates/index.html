@@ -13,6 +13,16 @@
     {% endfor %}
   </ul>
 {% endif %}
+<div class="auth-buttons">
+  {% if request.user.is_authenticated %}
+    <span>Welcome, {{ request.user.username }}</span>
+    <a href="{% url 'logout' %}" class="button button-secondary">Logout</a>
+  {% else %}
+    <a href="{% url 'login' %}" class="button button-primary">Login</a>
+    <a href="{% url 'register' %}" class="button button-secondary">Register</a>
+  {% endif %}
+</div>
+<hr>
     <div class="container">
         <h1>Blog Posts by Category</h1>
         <a href="{% url 'create_post' %}" class="button button-primary">+ Create New Post</a>

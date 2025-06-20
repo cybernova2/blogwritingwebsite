@@ -5,15 +5,20 @@ from django.views.decorators.csrf import csrf_exempt
 from .models import BlogPost,Category
 from .forms import BlogPostForm
 from django.contrib import messages
-
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth.decorators import login_required
 # ---------- HTML Views ----------
+@login_required
 def index(request):
     categories = Category.objects.all().order_by('name')  # Sort categories A-Z
+ 
     return render(request, 'index.html', {'categories': categories})
+@login_required
 def post_detail(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)
     return render(request, 'post_detail.html', {'post': post})
-
+@login_required
 def create_post(request):
     if request.method == 'POST':
         form = BlogPostForm(request.POST)
@@ -26,7 +31,7 @@ def create_post(request):
     else:
         form = BlogPostForm()
     return render(request, 'create_post.html', {'form': form})
-
+@login_required
 def edit_post(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)
 
@@ -44,6 +49,7 @@ def edit_post(request, pk):
         form = BlogPostForm(instance=post)
 
     return render(request, 'edit_post.html', {'form': form, 'post': post})
+@login_required
 def delete_post(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)
 
@@ -106,3 +112,32 @@ def api_delete_post(request, pk):
             return JsonResponse({'message': 'Post deleted'})
         except BlogPost.DoesNotExist:
             return JsonResponse({'error': 'Post not found'}, status=404)
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Registration successful! Please log in.")
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    return render(request, 'register.html', {'form': form})
+
+def login_view(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            user = form.get_user()
+            login(request, user)
+            messages.success(request, f"Welcome back, {user.username}!")
+            return redirect('index')
+        else:
+            messages.error(request, "Invalid username or password.")
+    else:
+        form = AuthenticationForm()
+    return render(request, 'login.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    messages.success(request, "You have been logged out.")
+    return redirect('index')

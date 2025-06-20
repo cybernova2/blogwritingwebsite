@@ -18,6 +18,12 @@ body {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
+/* Auth buttons container */
+.auth-buttons {
+    text-align: center;
+    margin: 20px 0;
+}
+
 /* Headings */
 h1 {
     margin-bottom: 20px;
@@ -114,6 +120,8 @@ form button {
 form button:hover {
     background-color: #218838;
 }
+
+/* Messages */
 ul.messages {
     list-style: none;
     padding: 0;
