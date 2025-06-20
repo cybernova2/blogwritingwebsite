@@ -8,7 +8,7 @@
 <body>
     <div class="auth-buttons">
   {% if request.user.is_authenticated %}
-    <span>Welcome, {{ request.user.username }}</span>
+    <span>Welcome, {{ request.user.username }} </span>
     <a href="{% url 'logout' %}" class="button button-secondary">Logout</a>
   {% else %}
     <a href="{% url 'login' %}" class="button button-primary">Login</a>
@@ -17,7 +17,7 @@
 </div>
 <hr>
   <div class="container">
-    <h1>Create New Post</h1>
+    <h1>Excited For New Post</h1>
     <form method="post">
       {% csrf_token %}
       {{ form.as_p }}
