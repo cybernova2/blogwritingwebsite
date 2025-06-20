@@ -1,21 +1,22 @@
 /* General page styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #001f3f;  /* Navy blue background */
     margin: 0;
     padding: 0;
-    color: #333;
+    color: #f4f4f4;  /* Light text for contrast */
 }
 
 /* Container for centering everything */
 .container {
     max-width: 600px;
+    width: 90%;
     margin: 50px auto;
     padding: 20px;
-    background: #fff;
+    background: #003366;  /* Darker blue box */
     border-radius: 8px;
     text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
 /* Auth buttons container */
@@ -28,11 +29,13 @@ body {
 h1 {
     margin-bottom: 20px;
     font-size: 2rem;
+    color: #3399ff;  /* Bright blue heading */
 }
 
 h2 {
     margin-top: 20px;
     font-size: 1.5rem;
+    color: #3399ff;  /* Bright blue for categories */
 }
 
 /* Post content */
@@ -40,6 +43,7 @@ p {
     line-height: 1.6;
     font-size: 1.1rem;
     margin-bottom: 15px;
+    color: #f4f4f4;
 }
 
 /* List styles for posts on home page */
@@ -50,6 +54,15 @@ ul {
 
 ul li {
     margin: 5px 0;
+}
+
+ul li a {
+    color: #66ccff;  /* Bright blue links */
+    text-decoration: none;
+}
+
+ul li a:hover {
+    text-decoration: underline;
 }
 
 /* Buttons */
@@ -104,6 +117,7 @@ form textarea {
     margin: 8px 0;
     border: 1px solid #ccc;
     border-radius: 4px;
+    box-sizing: border-box;
 }
 
 form button {

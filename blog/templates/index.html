@@ -7,9 +7,11 @@
 </head>
 <body>
 {% if messages %}
-  <ul class="messages">
-    <li class="{{ messages|last.tags }}">{{ messages|last }}</li>
-  </ul>
+  {% with messages|last as msg %}
+    <ul class="messages">
+      <li class="{{ msg.tags }}">{{ msg }}</li>
+    </ul>
+  {% endwith %}
 {% endif %}
 
 <div class="auth-buttons">
