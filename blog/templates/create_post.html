@@ -10,8 +10,8 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit">Submit</button>
+        <button type="submit" class="button button-primary">Submit</button>
     </form>
-    <a href="{% url 'index' %}">Back to Home</a>
+    <a href="{% url 'index' %}" class="button button-secondary">Back to Home</a>
 </body>
 </html>

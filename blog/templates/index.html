@@ -8,7 +8,7 @@
 </head>
 <body>
     <h1>Blog Posts by Category</h1>
-    <a href="{% url 'create_post' %}">+ Create New Post</a>
+    <a href="{% url 'create_post' %}" class="button button-primary">+ Create New Post</a>
     <hr>
 
     {% for category in categories %}

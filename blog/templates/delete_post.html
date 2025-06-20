@@ -6,8 +6,8 @@
     <h1>Delete "{{ post.title }}"?</h1>
     <form method="post">
         {% csrf_token %}
-        <button type="submit">Yes, delete</button>
+        <button type="submit" class="button button-delete">Yes, delete</button>
     </form>
-    <a href="{% url 'index' %}">Cancel</a>
+    <a href="{% url 'index' %}" class="button button-edit">Cancel</a>
 </body>
 </html>

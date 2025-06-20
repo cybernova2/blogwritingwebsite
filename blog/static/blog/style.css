@@ -1,40 +1,151 @@
+/* General body styling */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    margin: 20px;
-    padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #0f111a;
+    color: #e5e5e5;
+    margin: 0;
+    padding: 0 10px;
+    line-height: 1.6;
+}
+
+/* Headers */
+h1, h2 {
+    color: #00bcd4;
+    border-bottom: 1px solid #333;
+    padding-bottom: 5px;
 }
 
 h1 {
-    color: #333;
+    font-size: 2em;
+    margin-top: 20px;
 }
 
+h2 {
+    font-size: 1.5em;
+    margin-top: 15px;
+}
+
+/* Links */
 a {
+    color: #03a9f4;
     text-decoration: none;
-    color: #007bff;
 }
 
 a:hover {
+    color: #00e5ff;
     text-decoration: underline;
 }
 
-.post {
-    background-color: #751a1a;
-    padding: 15px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
-
-button, input[type="submit"] {
-    background-color: #007bff;
+/* Base button style */
+a.button, button {
+    display: inline-block;
+    padding: 10px 15px;
     border: none;
-    padding: 10px 20px;
-    color: white;
     border-radius: 4px;
+    text-decoration: none;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin: 5px 0;
+    font-weight: bold;
 }
 
-button:hover {
-    background-color: #0056b3;
+/* Primary button */
+.button-primary {
+    background-color: #1a237e;
+    color: #fff;
+}
+
+.button-primary:hover {
+    background-color: #3949ab;
+}
+
+/* Secondary button */
+.button-secondary {
+    background-color: #263238;
+    color: #fff;
+}
+
+.button-secondary:hover {
+    background-color: #455a64;
+}
+
+/* Edit button */
+.button-edit {
+    background-color: #0277bd;
+    color: #fff;
+}
+
+.button-edit:hover {
+    background-color: #039be5;
+}
+
+/* Delete button */
+.button-delete {
+    background-color: #b71c1c;
+    color: #fff;
+}
+
+.button-delete:hover {
+    background-color: #d32f2f;
+}
+
+/* List styling */
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px 0;
+}
+
+/* Form styling */
+form {
+    background: #1c1f2b;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+input[type="text"],
+textarea,
+select {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0 10px;
+    border: 1px solid #333;
+    border-radius: 4px;
+    background-color: #12141c;
+    color: #e5e5e5;
+}
+
+button[type="submit"] {
+    width: 100%;
+}
+
+/* Horizontal rule */
+hr {
+    border: 0;
+    height: 1px;
+    background: #333;
+    margin: 10px 0;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    body {
+        padding: 0 5px;
+    }
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    a.button, button {
+        padding: 8px 10px;
+        font-size: 0.9em;
+    }
 }
