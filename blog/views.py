@@ -18,7 +18,10 @@ def create_post(request):
     if request.method == 'POST':
         form = BlogPostForm(request.POST)
         if form.is_valid():
-            form.save()
+            post = form.save(commit=False)
+            post.author = request.user  # 🔑 Set the author properly!
+            post.save()
+            messages.success(request, "Post created successfully!")
             return redirect('index')
     else:
         form = BlogPostForm()
