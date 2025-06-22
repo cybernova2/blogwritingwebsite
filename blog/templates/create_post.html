@@ -1,29 +1,47 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Create Post</title>
   <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
-    <div class="auth-buttons">
-  {% if request.user.is_authenticated %}
-    <span>Welcome, {{ request.user.username }} </span>
-    <a href="{% url 'logout' %}" class="button button-secondary">Logout</a>
-  {% else %}
-    <a href="{% url 'login' %}" class="button button-primary">Login</a>
-    <a href="{% url 'register' %}" class="button button-secondary">Register</a>
-  {% endif %}
-</div>
-<hr>
-  <div class="container">
-    <h1>Excited For New Post</h1>
-    <form method="post">
-      {% csrf_token %}
-      {{ form.as_p }}
-      <button type="submit" class="button button-primary">Submit</button>
-    </form>
-    <a href="{% url 'index' %}" class="button button-secondary">Back to Home</a>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div>
+    <a href="{% url 'index' %}">Home</a>
+    <a href="#">Categories</a>
   </div>
+  <div class="auth-buttons">
+    {% if request.user.is_authenticated %}
+      <span>Welcome, {{ request.user.username }}</span>
+      <a href="{% url 'logout' %}" class="btn">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn">Login</a>
+      <a href="{% url 'register' %}" class="btn">Register</a>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Content -->
+<div class="container">
+  <h1>Excited to Post Something New?</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Submit</button>
+  </form>
+
+  <a href="{% url 'index' %}" class="btn" style="margin-top: 15px; display: inline-block;">← Back to Home</a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  Made with ❤️ by Ayush
+</div>
+
 </body>
 </html>

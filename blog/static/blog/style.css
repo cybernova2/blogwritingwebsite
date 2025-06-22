@@ -1,166 +1,238 @@
-/* General page styles */
+/* Base Reset & Typography */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #001f3f;  /* Navy blue background */
+    background-color: #f9f9f9;
     margin: 0;
     padding: 0;
-    color: #f4f4f4;  /* Light text for contrast */
+    color: #333;
 }
 
-/* Container for centering everything */
-.container {
-    max-width: 600px;
-    width: 90%;
-    margin: 50px auto;
-    padding: 20px;
-    background: #003366;  /* Darker blue box */
-    border-radius: 8px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+/* Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 15px 30px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-/* Auth buttons container */
-.auth-buttons {
-    text-align: center;
-    margin: 20px 0;
-}
-
-/* Headings */
-h1 {
-    margin-bottom: 20px;
-    font-size: 2rem;
-    color: #3399ff;  /* Bright blue heading */
-}
-
-h2 {
-    margin-top: 20px;
-    font-size: 1.5rem;
-    color: #3399ff;  /* Bright blue for categories */
-}
-
-/* Post content */
-p {
-    line-height: 1.6;
-    font-size: 1.1rem;
-    margin-bottom: 15px;
-    color: #f4f4f4;
-}
-
-/* List styles for posts on home page */
-ul {
-    list-style: none;
-    padding: 0;
-}
-
-ul li {
-    margin: 5px 0;
-}
-
-ul li a {
-    color: #66ccff;  /* Bright blue links */
+.navbar a {
+    margin-right: 20px;
     text-decoration: none;
+    color: #333;
+    font-weight: 500;
 }
 
-ul li a:hover {
-    text-decoration: underline;
+.navbar a:last-child {
+    margin-right: 0;
+}
+
+.navbar .auth-buttons a {
+    margin-left: 10px;
 }
 
 /* Buttons */
-.button {
-    display: inline-block;
-    padding: 10px 16px;
-    text-decoration: none;
-    border-radius: 4px;
-    color: #fff;
-    font-weight: bold;
-    transition: background 0.3s ease;
-    margin: 5px;
-}
-
-.button-primary {
+.btn {
     background-color: #007bff;
+    color: white;
+    padding: 8px 16px;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    display: inline-block;
+    transition: background-color 0.3s ease;
 }
 
-.button-primary:hover {
+.btn:hover {
     background-color: #0056b3;
 }
 
-.button-secondary {
-    background-color: #6c757d;
+.btn.danger {
+    background-color: #ff4444;
 }
 
-.button-secondary:hover {
-    background-color: #5a6268;
+.btn.danger:hover {
+    background-color: #cc0000;
 }
 
-.button-edit {
-    background-color: #17a2b8;
+.btn.secondary {
+    background-color: #888;
+    color: white;
 }
 
-.button-edit:hover {
-    background-color: #117a8b;
+.btn.secondary:hover {
+    background-color: #666;
 }
 
-.button-delete {
-    background-color: #dc3545;
+/* Container */
+.container {
+    max-width: 800px;
+    margin: 30px auto;
+    padding: 0 20px;
 }
 
-.button-delete:hover {
-    background-color: #a71d2a;
-}
-
-/* Form inputs */
-form input,
-form textarea {
-    width: 100%;
-    padding: 10px;
-    margin: 8px 0;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-}
-
-form button {
-    padding: 10px 16px;
-    border: none;
-    border-radius: 4px;
-    background-color: #28a745;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-form button:hover {
-    background-color: #218838;
-}
-
-/* Messages */
-ul.messages {
+/* Flash Messages */
+.messages {
     list-style: none;
-    padding: 0;
-    margin: 10px 0 20px 0;
+    padding: 10px 20px;
+    margin: 10px auto;
+    max-width: 800px;
+    border-radius: 5px;
+    background-color: #ffefc1;
+    color: #6b4b00;
+    font-weight: 500;
 }
 
-ul.messages li {
-    padding: 10px;
-    border-radius: 4px;
+/* Post Card */
+.post-card {
+    background-color: #ffffff;
+    padding: 20px;
+    margin: 20px 0;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.post-title {
+    margin-top: 0;
+    font-size: 1.5em;
+    color: #222;
+}
+
+.post-meta {
+    font-size: 0.9em;
+    color: #888;
+    margin-bottom: 10px;
+}
+
+.post-content {
+    margin-bottom: 15px;
+}
+
+/* Forms */
+form {
+    background-color: #ffffff;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+form p {
+    margin-bottom: 15px;
+}
+
+form label {
+    display: block;
+    font-weight: 600;
     margin-bottom: 5px;
-    font-weight: bold;
+    color: #333;
 }
 
-ul.messages li.success {
-    background-color: #d4edda;
-    color: #155724;
-    border: 1px solid #c3e6cb;
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea,
+form select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    box-sizing: border-box;
+    transition: border 0.3s ease;
 }
 
-ul.messages li.error {
-    background-color: #f8d7da;
-    color: #721c24;
-    border: 1px solid #f5c6cb;
+form input:focus,
+form textarea:focus,
+form select:focus {
+    border-color: #007bff;
+    outline: none;
 }
-ul li::before {
-    content: "📌 ";
-    margin-right: 5px;
+
+/* Paragraph links (e.g., login/register) */
+.container p a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: 500;
 }
+
+.container p a:hover {
+    text-decoration: underline;
+}
+
+/* Footer */
+.footer {
+    text-align: center;
+    padding: 20px;
+    font-size: 14px;
+    color: #aaa;
+    margin-top: 50px;
+}
+/* RESPONSIVE STYLES */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .auth-buttons {
+        margin-top: 10px;
+    }
+
+    .container {
+        padding: 0 15px;
+    }
+
+    .post-card {
+        padding: 15px;
+    }
+
+    form {
+        padding: 15px;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 10px;
+    }
+
+    .btn.secondary,
+    .btn.danger {
+        width: 100%;
+    }
+}
+/* ANIMATIONS & TRANSITIONS */
+
+/* Smooth shadow and color transitions */
+.post-card,
+form,
+.btn {
+    transition: all 0.3s ease-in-out;
+}
+
+/* Hover lift effect on post cards */
+.post-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+/* Input focus transition */
+form input:focus,
+form textarea:focus,
+form select:focus {
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.3);
+}
+
+/* Button interaction */
+.btn:hover {
+    transform: scale(1.02);
+}
+

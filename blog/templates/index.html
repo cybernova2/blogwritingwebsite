@@ -1,51 +1,71 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Blog - Home</title>
     <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
+
+<!-- Navbar -->
+<div class="navbar">
+    <div>
+        <a href="#">Home</a>
+        <a href="#">Categories</a>
+    </div>
+    <div class="auth-buttons">
+        {% if request.user.is_authenticated %}
+            <span>Welcome, {{ request.user.username }}</span>
+            <a href="{% url 'logout' %}" class="btn">Logout</a>
+        {% else %}
+            <a href="{% url 'login' %}" class="btn">Login</a>
+            <a href="{% url 'register' %}" class="btn">Register</a>
+        {% endif %}
+    </div>
+</div>
+
+<!-- Flash Messages -->
 {% if last_message %}
   <ul class="messages">
     <li class="{{ last_message.tags }}">{{ last_message }}</li>
   </ul>
 {% endif %}
 
-<div class="auth-buttons">
-  {% if request.user.is_authenticated %}
-    <span>Welcome, {{ request.user.username }}</span>
-    <a href="{% url 'logout' %}" class="button button-secondary">Logout</a>
-  {% else %}
-    <a href="{% url 'login' %}" class="button button-primary">Login</a>
-    <a href="{% url 'register' %}" class="button button-secondary">Register</a>
-  {% endif %}
-</div>
-<hr>
-    <div class="container">
-        <h1>Blog Posts by Category</h1>
-        <a href="{% url 'create_post' %}" class="button button-primary">+ Create New Post</a>
-        <hr>
+<!-- Page Content -->
+<div class="container">
+    <h1>Blog Posts by Category</h1>
+    <a href="{% url 'create_post' %}" class="btn">+ Create New Post</a>
+    <hr>
 
-        {% for category in categories %}
-            <h2>{{ category.name }}</h2>
-            {% with posts=category.posts.all|dictsort:"title" %}
-                {% if posts %}
-                    <ul>
-                        {% for post in posts %}
-                            <li>
-                                <a href="{% url 'post_detail' post.id %}">{{ post.title }}</a>
-                            </li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                    <p>No posts in this category.</p>
-                {% endif %}
-            {% endwith %}
-            <hr>
-        {% empty %}
-            <p>No categories found.</p>
-        {% endfor %}
-    </div>
+    {% for category in categories %}
+        <h2>{{ category.name }}</h2>
+        {% with posts=category.posts.all|dictsort:"title" %}
+            {% if posts %}
+                {% for post in posts %}
+                    <div class="post-card">
+                        <h2 class="post-title">{{ post.title }}</h2>
+                        <p class="post-meta">
+                            By {{ post.author }} • {{ post.created_at|date:"M d, Y" }}
+                        </p>
+                        <p class="post-content">{{ post.content|truncatewords:30 }}</p>
+                        <a href="{% url 'post_detail' post.id %}" class="btn">Read More</a>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>No posts in this category.</p>
+            {% endif %}
+        {% endwith %}
+        <hr>
+    {% empty %}
+        <p>No categories found.</p>
+    {% endfor %}
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    Made with ❤️ by Ayush
+</div>
+
 </body>
 </html>

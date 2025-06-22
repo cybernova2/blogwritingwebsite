@@ -1,18 +1,38 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Delete Post</title>
   <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
-  <div class="container">
-    <h1>Delete "{{ post.title }}"?</h1>
-    <form method="post">
-      {% csrf_token %}
-      <button type="submit">Yes, delete</button>
-    </form>
-    <a href="{% url 'index' %}">Cancel</a>
+
+<!-- Navbar -->
+<div class="navbar">
+  <div>
+    <a href="{% url 'index' %}">Home</a>
   </div>
+</div>
+
+<!-- Content -->
+<div class="container">
+  <h1>Are you sure you want to delete <em>"{{ post.title }}"</em>?</h1>
+
+  <form method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn" style="background-color: #ff4444;">Yes, Delete</button>
+  </form>
+
+  <a href="{% url 'index' %}" class="btn" style="background-color: #888; margin-top: 10px; display: inline-block;">
+    Cancel
+  </a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  Made with ❤️ by Ayush
+</div>
+
 </body>
 </html>

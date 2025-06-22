@@ -1,32 +1,50 @@
 {% load static %}
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>{{ post.title }}</title>
   <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
 <body>
-    <div class="auth-buttons">
-  {% if request.user.is_authenticated %}
-    <span>hello, {{ request.user.username }}</span>
-    <a href="{% url 'logout' %}" class="button button-secondary">Logout</a>
-  {% else %}
-    <a href="{% url 'login' %}" class="button button-primary">Login</a>
-    <a href="{% url 'register' %}" class="button button-secondary">Register</a>
-  {% endif %}
-</div>
-<hr>
-  <div class="container">
-    <h1>{{ post.title }}</h1>
-    <p>{{ post.content }}</p>
-    <hr>
 
-    {% if request.user == post.author %}
-      <a href="{% url 'edit_post' post.id %}" class="button button-edit">Edit</a> |
-      <a href="{% url 'delete_post' post.id %}" class="button button-delete">Delete</a> |
-    {% endif %}
-    
-    <a href="{% url 'index' %}" class="button button-secondary">Back to Home</a>
+<!-- Navbar -->
+<div class="navbar">
+  <div>
+    <a href="{% url 'index' %}">Home</a>
   </div>
+  <div class="auth-buttons">
+    {% if request.user.is_authenticated %}
+      <span>Hello, {{ request.user.username }}</span>
+      <a href="{% url 'logout' %}" class="btn">Logout</a>
+    {% else %}
+      <a href="{% url 'login' %}" class="btn">Login</a>
+      <a href="{% url 'register' %}" class="btn">Register</a>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Post Content -->
+<div class="container">
+  <div class="post-card">
+    <h1 class="post-title">{{ post.title }}</h1>
+    <p class="post-content">{{ post.content }}</p>
+  </div>
+
+  {% if request.user == post.author %}
+    <div style="margin-top: 20px;">
+      <a href="{% url 'edit_post' post.id %}" class="btn" >Edit</a>
+      <a href="{% url 'delete_post' post.id %}" class="btn danger" >Delete</a>
+    </div>
+  {% endif %}
+
+  <a href="{% url 'index' %}" class="btn secondary" style="margin-top: 15px; display: inline-block;">← Back to Home</a>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  Made with ❤️ by Ayush
+</div>
+
 </body>
 </html>
