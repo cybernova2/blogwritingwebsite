@@ -6,7 +6,8 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import login_required
-
+from django.utils import timezone
+from datetime import timedelta
 # ---------- HTML Views ----------
 
 @login_required
@@ -26,6 +27,17 @@ def create_post(request):
     if request.method == 'POST':
         form = BlogPostForm(request.POST)
         if form.is_valid():
+            # Check if a similar post was already submitted in the last 5 seconds
+            recent_post = BlogPost.objects.filter(
+                author=request.user,
+                title=form.cleaned_data['title'],  # or another unique field
+                created_at__gte=timezone.now() - timedelta(seconds=5)
+            ).exists()
+
+            if recent_post:
+                messages.warning(request, "You just submitted this post. Please wait a moment.")
+                return redirect('index')
+
             post = form.save(commit=False)
             post.author = request.user
             post.save()
