@@ -6,6 +6,7 @@
   <title>{{ post.title }}</title>
   <link rel="stylesheet" href="{% static 'blog/style.css' %}">
 </head>
+
 <body>
 
 <!-- Navbar -->
@@ -33,12 +34,36 @@
 
   {% if request.user == post.author %}
     <div style="margin-top: 20px;">
-      <a href="{% url 'edit_post' post.id %}" class="btn" >Edit</a>
-      <a href="{% url 'delete_post' post.id %}" class="btn danger" >Delete</a>
+      <a href="{% url 'edit_post' post.id %}" class="btn">Edit</a>
+      <a href="{% url 'delete_post' post.id %}" class="btn danger">Delete</a>
     </div>
   {% endif %}
 
   <a href="{% url 'index' %}" class="btn secondary" style="margin-top: 15px; display: inline-block;">← Back to Home</a>
+
+  <!-- Comments Section -->
+  <div style="margin-top: 40px;">
+    <h2>Comments</h2>
+
+    {% for comment in comments %}
+      <div style="margin-bottom: 10px;">
+        <strong>{{ comment.user.username }}</strong> — <small>{{ comment.created_at|date:"M d, Y H:i" }}</small><br>
+        <p>{{ comment.text }}</p>
+      </div>
+    {% empty %}
+      <p>No comments yet. Be the first to comment!</p>
+    {% endfor %}
+
+    {% if user.is_authenticated %}
+      <form method="POST" style="margin-top: 20px;">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Add Comment</button>
+      </form>
+    {% else %}
+      <p style="margin-top: 20px;"><a href="{% url 'login' %}">Log in</a> to post a comment.</p>
+    {% endif %}
+  </div>
 </div>
 
 <!-- Footer -->
