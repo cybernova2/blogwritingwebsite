@@ -20,7 +20,7 @@ def index(request):
 @login_required
 def post_detail(request, pk):
     post = get_object_or_404(BlogPost, pk=pk)
-    comments = post.comments.all()
+    comments = post.comments.all().order_by('-created_at')
     form = CommentForm()
     if request.method == 'POST':
         if request.user.is_authenticated:
@@ -30,11 +30,12 @@ def post_detail(request, pk):
                 comment.post = post
                 comment.user = request.user
                 comment.save()
-                return redirect('post_detail', post_id=post.id)
+                return redirect('post_detail', pk=post.id)
         else:
             return redirect('login') 
 
-    return render(request, 'post_detail.html', {'post': post})
+    return render(request, 'post_detail.html', {'post': post,'comments': comments,'form': form
+})
 
 @login_required
 def create_post(request):
